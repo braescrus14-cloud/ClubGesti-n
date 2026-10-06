@@ -1,0 +1,13 @@
+<!DOCTYPE html><html lang="es" xmlns:th="http://www.thymeleaf.org"><head th:replace="~{fragmentos :: head('Asociación')}"></head><body>
+
+ <div th:replace="~{fragmentos :: nav}"></div><main class="page"><div th:replace="~{fragmentos :: mensajes}"></div>
+
+ <a class="back" href="/web/asociaciones">← Volver a asociaciones</a><div class="page-heading"><div><div class="eyebrow">CATÁLOGO</div><h1 th:text="${id == null ? 'Crear asociación' : 'Editar asociación'}"></h1></div></div>
+
+ <form class="surface narrow" method="post" th:action="@{/web/asociaciones/guardar}" th:object="${registro}"><input type="hidden" name="id" th:value="${id}">
+
+ <div th:if="${#fields.hasAnyErrors()}" class="alert alert-danger" role="alert"><p th:each="err : ${#fields.allErrors()}" th:text="${err}"></p></div>
+
+ <div class="mb-4"><label class="form-label" for="nombre">Nombre</label><input class="form-control" type="text" th:field="*{nombre}" th:errorclass="is-invalid" required maxlength="100"><div class="invalid-feedback" th:errors="*{nombre}"></div></div><div class="mb-4"><label class="form-label" for="siglas">Siglas</label><input class="form-control" type="text" th:field="*{siglas}" th:errorclass="is-invalid" required maxlength="15"><div class="invalid-feedback" th:errors="*{siglas}"></div></div><div class="mb-4"><label class="form-label" for="pais">País</label><input class="form-control" type="text" th:field="*{pais}" th:errorclass="is-invalid" required maxlength="60"><div class="invalid-feedback" th:errors="*{pais}"></div></div><div class="mb-4"><label class="form-label" for="presidente">Presidente</label><input class="form-control" type="text" th:field="*{presidente}" th:errorclass="is-invalid" required maxlength="100"><div class="invalid-feedback" th:errors="*{presidente}"></div></div><div class="d-flex gap-2"><button class="btn btn-primary">Guardar asociación</button><a class="btn btn-outline-secondary" href="/web/asociaciones">Cancelar</a></div></form>
+
+ </main></body></html>

@@ -1,0 +1,13 @@
+<!DOCTYPE html><html lang="es" xmlns:th="http://www.thymeleaf.org"><head th:replace="~{fragmentos :: head('Jugadores')}"></head><body>
+
+ <div th:replace="~{fragmentos :: nav}"></div><main class="page"><div th:replace="~{fragmentos :: mensajes}"></div>
+
+ <div class="page-heading"><div><div class="eyebrow">CATÁLOGO</div><h1>Jugadores</h1><p>Consulta y administra los registros que forman parte de tus clubes.</p></div><a class="btn btn-primary" href="/web/jugadores/nuevo">+ Crear jugador</a></div>
+
+ <div class="empty" th:if="${#lists.isEmpty(registros)}"><h2>Aún no hay registros</h2><p>Crea el primero para empezar a organizar tus equipos.</p></div>
+
+ <div class="surface table-responsive" th:unless="${#lists.isEmpty(registros)}"><table class="table align-middle"><caption>Jugadores registrados</caption><thead><tr><th scope="col">ID</th><th scope="col">Nombre</th><th scope="col">Apellido</th><th scope="col">Dorsal</th><th scope="col">Posición</th><th scope="col">Club asignado</th><th scope="col">Acciones</th></tr></thead><tbody>
+
+ <tr th:each="r : ${registros}"><td class="muted" th:text="${r.id}"></td><td th:text="${r.nombre}"></td><td th:text="${r.apellido}"></td><td th:text="${r.numero}"></td><td th:text="${r.posicion}"></td><td th:text="${r.clubId == null ? 'Sin asignar' : clubesNombres[r.clubId]}"></td><td class="actions"><a class="btn btn-sm btn-outline-dark" th:href="@{/web/jugadores/{id}/editar(id=${r.id})}">Editar</a><form method="post" th:action="@{/web/jugadores/{id}/eliminar(id=${r.id})}" onsubmit="return confirm('¿Eliminar este registro?');"><button class="btn btn-sm btn-outline-danger">Eliminar</button></form></td></tr></tbody></table></div>
+
+ </main></body></html>

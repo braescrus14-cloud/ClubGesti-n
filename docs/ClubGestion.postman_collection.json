@@ -1,0 +1,455 @@
+{
+  "info": {
+    "name": "ClubGestión — API REST",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Crea primero asociación, entrenador, jugador y competición. Cada POST guarda el ID en variables. Elimina el club antes de sus catálogos."
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8092"
+    },
+    {
+      "key": "asociacionesId",
+      "value": ""
+    },
+    {
+      "key": "entrenadoresId",
+      "value": ""
+    },
+    {
+      "key": "jugadoresId",
+      "value": ""
+    },
+    {
+      "key": "competicionesId",
+      "value": ""
+    },
+    {
+      "key": "clubesId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "asociaciones",
+      "item": [
+        {
+          "name": "Listar",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/asociaciones"
+          }
+        },
+        {
+          "name": "Consultar",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/asociaciones/{{asociacionesId}}"
+          }
+        },
+        {
+          "name": "Crear",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/asociaciones",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Federación de ejemplo\",\n  \"siglas\": \"FDE\",\n  \"pais\": \"Colombia\",\n  \"presidente\": \"Ana Pérez\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 201) pm.collectionVariables.set(\"asociacionesId\", pm.response.json().id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Actualizar",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/asociaciones/{{asociacionesId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Federación de ejemplo\",\n  \"siglas\": \"FDE\",\n  \"pais\": \"Colombia\",\n  \"presidente\": \"Ana Pérez\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Eliminar",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/api/asociaciones/{{asociacionesId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "entrenadores",
+      "item": [
+        {
+          "name": "Listar",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/entrenadores"
+          }
+        },
+        {
+          "name": "Consultar",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/entrenadores/{{entrenadoresId}}"
+          }
+        },
+        {
+          "name": "Crear",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/entrenadores",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Carlos\",\n  \"apellido\": \"Gómez\",\n  \"edad\": 42,\n  \"nacionalidad\": \"Colombiana\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 201) pm.collectionVariables.set(\"entrenadoresId\", pm.response.json().id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Actualizar",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/entrenadores/{{entrenadoresId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Carlos\",\n  \"apellido\": \"Gómez\",\n  \"edad\": 42,\n  \"nacionalidad\": \"Colombiana\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Eliminar",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/api/entrenadores/{{entrenadoresId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "jugadores",
+      "item": [
+        {
+          "name": "Listar",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/jugadores"
+          }
+        },
+        {
+          "name": "Consultar",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/jugadores/{{jugadoresId}}"
+          }
+        },
+        {
+          "name": "Crear",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/jugadores",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Luis\",\n  \"apellido\": \"Pérez\",\n  \"numero\": 10,\n  \"posicion\": \"Delantero\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 201) pm.collectionVariables.set(\"jugadoresId\", pm.response.json().id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Actualizar",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/jugadores/{{jugadoresId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Luis\",\n  \"apellido\": \"Pérez\",\n  \"numero\": 10,\n  \"posicion\": \"Delantero\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Eliminar",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/api/jugadores/{{jugadoresId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "competiciones",
+      "item": [
+        {
+          "name": "Listar",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/competiciones"
+          }
+        },
+        {
+          "name": "Consultar",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/competiciones/{{competicionesId}}"
+          }
+        },
+        {
+          "name": "Crear",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/competiciones",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Copa de ejemplo\",\n  \"montoPremio\": 1000000,\n  \"fechaInicio\": \"2026-10-10\",\n  \"fechaFin\": \"2026-12-10\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 201) pm.collectionVariables.set(\"competicionesId\", pm.response.json().id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Actualizar",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/competiciones/{{competicionesId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Copa de ejemplo\",\n  \"montoPremio\": 1000000,\n  \"fechaInicio\": \"2026-10-10\",\n  \"fechaFin\": \"2026-12-10\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Eliminar",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/api/competiciones/{{competicionesId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "clubes",
+      "item": [
+        {
+          "name": "Listar",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/clubes"
+          }
+        },
+        {
+          "name": "Consultar",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/clubes/{{clubesId}}"
+          }
+        },
+        {
+          "name": "Crear",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/clubes",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Club Andino\",\n  \"entrenadorId\": {{entrenadoresId}},\n  \"asociacionId\": {{asociacionesId}},\n  \"jugadorIds\": [\n    {{jugadoresId}}\n  ],\n  \"competicionIds\": [\n    {{competicionesId}}\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 201) pm.collectionVariables.set(\"clubesId\", pm.response.json().id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Actualizar",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/clubes/{{clubesId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Club Andino\",\n  \"entrenadorId\": {{entrenadoresId}},\n  \"asociacionId\": {{asociacionesId}},\n  \"jugadorIds\": [\n    {{jugadoresId}}\n  ],\n  \"competicionIds\": [\n    {{competicionesId}}\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Eliminar",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/api/clubes/{{clubesId}}"
+          }
+        }
+      ]
+    }
+  ]
+}

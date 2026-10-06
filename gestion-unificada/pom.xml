@@ -1,0 +1,11 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+ <modelVersion>4.0.0</modelVersion><parent><groupId>com.esteban</groupId><artifactId>gestion-equipos</artifactId><version>1.0.0</version></parent>
+ <artifactId>gestion-unificada</artifactId><name>ClubGestión · servidor único 8092</name>
+ <dependencies>
+ <dependency><groupId>com.esteban</groupId><artifactId>cliente-servidor-jpa</artifactId><version>${project.version}</version></dependency>
+ <dependency><groupId>com.esteban</groupId><artifactId>api-rest-mongo</artifactId><version>${project.version}</version></dependency>
+ <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-webmvc-test</artifactId><scope>test</scope></dependency>
+ </dependencies>
+ <build><plugins><plugin><groupId>org.springframework.boot</groupId><artifactId>spring-boot-maven-plugin</artifactId></plugin></plugins></build>
+ <profiles><profile><id>iniciar</id><build><plugins><plugin><groupId>org.springframework.boot</groupId><artifactId>spring-boot-maven-plugin</artifactId><executions><execution><id>iniciar-servidor-unico</id><phase>package</phase><goals><goal>run</goal></goals></execution></executions></plugin></plugins></build></profile></profiles>
+</project>

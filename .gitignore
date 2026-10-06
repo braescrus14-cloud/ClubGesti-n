@@ -1,0 +1,31 @@
+# Maven, Spring Tools y archivos de ejecución
+**/target/
+**/bin/
+**/.classpath
+**/.project
+**/.settings/
+*.launch
+*.log
+# Credenciales y bases de datos locales
+.env*
+**/.env*
+**/data/
+*.mv.db
+*.trace.db
+# Sistema operativo
+Thumbs.db
+.DS_Store
+
+# Archivos generados y credenciales del entorno
+*.jar
+*.war
+*.zip
+*.pid
+*.dump
+*.dumpstream
+*.hprof
+*.jks
+*.p12
+*.pem
+.vscode/
+.idea/

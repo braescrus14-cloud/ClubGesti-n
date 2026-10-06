@@ -1,0 +1,11 @@
+<!DOCTYPE html><html lang="es" xmlns:th="http://www.thymeleaf.org"><head th:fragment="head(titulo)">
+
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title th:text="${titulo} + ' · ClubGestión'"></title>
+
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"><link rel="stylesheet" th:href="@{/css/app.css}"><script th:src="@{/js/interfaz.js}" defer></script></head><body>
+
+<header th:fragment="nav" class="topbar"><a class="brand" th:href="@{/inicio}"><span class="brand-mark">CG</span> ClubGestión</a><span class="mode">CLIENTE · SERVIDOR</span><nav aria-label="Principal"><a th:href="@{/web/clubes}">Clubes</a><a th:href="@{/web/entrenadores}">Entrenadores</a><a th:href="@{/web/jugadores}">Jugadores</a><a th:href="@{/web/asociaciones}">Asociaciones</a><a th:href="@{/web/competiciones}">Competiciones</a><a class="api-link" th:href="${apiUrl}">Interfaz REST ↗</a></nav></header>
+
+<div th:fragment="mensajes"><div th:if="${mensaje}" class="alert alert-success" role="status" th:text="${mensaje}"></div><div th:if="${error}" class="alert alert-danger" role="alert" th:text="${error}"></div></div>
+
+</body></html>

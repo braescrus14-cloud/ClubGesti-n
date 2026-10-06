@@ -1,0 +1,3 @@
+<!DOCTYPE html><html lang="es" xmlns:th="http://www.thymeleaf.org"><head th:replace="~{fragmentos :: head('No se pudo completar la operación')}"></head><body>
+
+ <div th:replace="~{fragmentos :: nav}"></div><main class="page"><div th:replace="~{fragmentos :: mensajes}"></div><div class="surface narrow"><div class="eyebrow">REVISA LA OPERACIÓN</div><h1>No se pudo completar</h1><p th:text="${detalle ?: 'La página no está disponible o los datos enviados no son válidos.'}"></p><a href="/" class="btn btn-primary">Volver al inicio</a></div></main></body></html>

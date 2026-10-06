@@ -1,0 +1,25 @@
+<!DOCTYPE html><html lang="es" xmlns:th="http://www.thymeleaf.org"><head th:replace="~{fragmentos :: head('Formulario de club')}"></head><body>
+
+ <div th:replace="~{fragmentos :: nav}"></div><main class="page"><div th:replace="~{fragmentos :: mensajes}"></div>
+
+<a class="back" href="/web/clubes">← Volver a clubes</a><div class="page-heading"><div><div class="eyebrow">EQUIPO Y RELACIONES</div><h1 th:text="${id == null ? 'Crear club' : 'Editar club'}"></h1><p>Selecciona un entrenador y una asociación. Los jugadores y las competiciones son opcionales.</p></div></div>
+
+<div class="alert alert-info" th:if="${#lists.isEmpty(entrenadores) or #lists.isEmpty(asociaciones)}">Necesitas registrar al menos un <a href="/web/entrenadores/nuevo">entrenador</a> y una <a href="/web/asociaciones/nuevo">asociación</a> antes de guardar.</div>
+
+<form class="surface form-wide" method="post" th:action="@{/web/clubes/guardar}" th:object="${registro}"><input type="hidden" name="id" th:value="${id}">
+
+<div th:if="${#fields.hasAnyErrors()}" class="alert alert-danger" role="alert"><p th:each="err : ${#fields.allErrors()}" th:text="${err}"></p></div>
+
+<div class="mb-4"><label for="nombre" class="form-label">Nombre del club</label><input class="form-control" th:field="*{nombre}" required maxlength="100"></div>
+
+<div class="row"><div class="col-md-6 mb-4"><label for="entrenadorId" class="form-label">Entrenador · uno a uno</label><select class="form-select" th:field="*{entrenadorId}" required><option value="">Selecciona un entrenador</option><option th:each="e : ${entrenadores}" th:value="${e.id}" th:text="${e.nombre + ' ' + e.apellido}"></option></select></div>
+
+<div class="col-md-6 mb-4"><label for="asociacionId" class="form-label">Asociación · muchos a uno</label><select class="form-select" th:field="*{asociacionId}" required><option value="">Selecciona una asociación</option><option th:each="a : ${asociaciones}" th:value="${a.id}" th:text="${a.nombre + ' (' + a.siglas + ')'}"></option></select></div></div>
+
+<fieldset class="mb-4"><legend>Jugadores · uno a muchos</legend><p class="muted">Un jugador solo puede pertenecer a un club. No se permiten dorsales repetidos en el mismo equipo.</p><p th:if="${#lists.isEmpty(jugadores)}">No hay jugadores. Puedes agregarlos después.</p><div class="check-grid"><label class="check-option" th:each="j : ${jugadores}"><input type="checkbox" th:field="*{jugadorIds}" th:value="${j.id}"><span th:text="${'#' + j.numero + ' · ' + j.nombre + ' ' + j.apellido}"></span></label></div></fieldset>
+
+<fieldset class="mb-4"><legend>Competiciones · muchos a muchos</legend><p th:if="${#lists.isEmpty(competiciones)}">No hay competiciones. Puedes agregarlas después.</p><div class="check-grid"><label class="check-option" th:each="c : ${competiciones}"><input type="checkbox" th:field="*{competicionIds}" th:value="${c.id}"><span th:text="${c.nombre}"></span></label></div></fieldset>
+
+<button class="btn btn-primary">Guardar club</button> <a class="btn btn-outline-secondary" href="/web/clubes">Cancelar</a></form>
+
+</main></body></html>

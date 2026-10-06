@@ -1,0 +1,19 @@
+<!DOCTYPE html><html lang="es" xmlns:th="http://www.thymeleaf.org"><head th:replace="~{fragmentos :: head('Clubes')}"></head><body>
+
+ <div th:replace="~{fragmentos :: nav}"></div><main class="page"><div th:replace="~{fragmentos :: mensajes}"></div>
+
+<div class="page-heading"><div><div class="eyebrow">TUS EQUIPOS</div><h1>Clubes</h1><p>El plantel, su dirección técnica y todas sus relaciones.</p></div><a class="btn btn-primary" href="/web/clubes/nuevo">+ Crear club</a></div>
+
+<div class="empty" th:if="${#lists.isEmpty(registros)}"><h2>Tu próximo equipo empieza aquí</h2><p>Registra una asociación y un entrenador, y luego crea tu primer club.</p><a href="/web/asociaciones" class="btn btn-outline-dark">Ver asociaciones</a></div>
+
+<div class="surface table-responsive" th:unless="${#lists.isEmpty(registros)}"><table class="table align-middle"><caption>Clubes registrados</caption><thead><tr><th>ID</th><th>Club</th><th>Entrenador</th><th>Asociación</th><th>Plantel</th><th>Acciones</th></tr></thead><tbody>
+
+<tr th:each="r : ${registros}"><td th:text="${r.id}"></td><td><a class="strong" th:href="@{/web/clubes/{id}(id=${r.id})}" th:text="${r.nombre}"></a></td><td th:text="${r.entrenador.nombre + ' ' + r.entrenador.apellido}"></td><td th:text="${r.asociacion.siglas}"></td><td th:text="${#lists.size(r.jugadores)} + ' jugadores'"></td><td class="actions"><a class="btn btn-sm btn-outline-dark" th:href="@{/web/clubes/{id}/editar(id=${r.id})}">Editar</a><form method="post" th:action="@{/web/clubes/{id}/eliminar(id=${r.id})}" onsubmit="return confirm('¿Eliminar el club y sus jugadores asignados? La asociación, el entrenador y las competiciones se conservarán.');"><button class="btn btn-sm btn-outline-danger">Eliminar</button></form></td></tr></tbody></table></div>
+
+<section th:if="${club}" class="mt-5"><h2 class="section-title" th:text="${club.nombre}"></h2><section class="intro-grid two"><article><div class="eyebrow">ENTRENADOR · 1:1</div><h2 th:text="${club.entrenador.nombre + ' ' + club.entrenador.apellido}"></h2><p th:text="${club.entrenador.edad + ' años · ' + club.entrenador.nacionalidad}"></p></article><article><div class="eyebrow">ASOCIACIÓN · N:1</div><h2 th:text="${club.asociacion.nombre}"></h2><p th:text="${club.asociacion.pais + ' · ' + club.asociacion.siglas}"></p><p th:text="'Presidente: ' + ${club.asociacion.presidente}"></p></article></section>
+
+<h2 class="section-title">Plantel <span class="muted">· 1:N</span></h2><p th:if="${#lists.isEmpty(club.jugadores)}">Aún no hay jugadores asignados.</p><div class="surface table-responsive" th:unless="${#lists.isEmpty(club.jugadores)}"><table class="table"><thead><tr><th>Dorsal</th><th>Jugador</th><th>Posición</th></tr></thead><tbody><tr th:each="j : ${club.jugadores}"><td th:text="${j.numero}"></td><td th:text="${j.nombre + ' ' + j.apellido}"></td><td th:text="${j.posicion}"></td></tr></tbody></table></div>
+
+<h2 class="section-title">Competiciones <span class="muted">· N:M</span></h2><p th:if="${#lists.isEmpty(club.competiciones)}">Aún no hay competiciones asignadas.</p><div class="surface table-responsive" th:unless="${#lists.isEmpty(club.competiciones)}"><table class="table"><thead><tr><th>Nombre</th><th>Premio (COP)</th><th>Inicio</th><th>Fin</th></tr></thead><tbody><tr th:each="c : ${club.competiciones}"><td th:text="${c.nombre}"></td><td th:text="${c.montoPremio}"></td><td th:text="${c.fechaInicio}"></td><td th:text="${c.fechaFin}"></td></tr></tbody></table></div>
+
+</section></main></body></html>

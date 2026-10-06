@@ -20,3 +20,6 @@
 **/*.jks
 .idea
 .vscode
+
+!target/
+!target/gestion-unificada-1.0.0.jar
